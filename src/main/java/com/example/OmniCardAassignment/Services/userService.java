@@ -1,15 +1,15 @@
 package com.example.OmniCardAassignment.Services;
 
 
-import com.example.OmniCardAassignment.Modals.User;
-import com.example.OmniCardAassignment.Repositories.userRepository;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.OmniCardAassignment.Modals.User;
+import com.example.OmniCardAassignment.Repositories.userRepository;
 
 @Service
 public class userService {
@@ -17,7 +17,7 @@ public class userService {
     private userRepository user_repository;
 
 
-    @CacheEvict(value = "listOfEmailsByPattern", allEntries = true)
+    
     public String addUserData(User user)
     {
         user_repository.save(user);
@@ -25,7 +25,7 @@ public class userService {
     }
 
 
-    @Cacheable("listOfEmailsByPattern")
+   
     public List<String> getEmailsByPattern(String pattern) throws Exception
     {
         List<User> list = user_repository.findAll();
